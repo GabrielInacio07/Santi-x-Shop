@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/User.java" afterDir="false" />
+    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Modelando as entidadesd com JPA">
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/SantixShopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/SantixShopApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,7 @@
       <list>
         <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -50,19 +52,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.SantixShopApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Gabriel Inácio/Documents/Santix"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.SantixShopApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Gabriel Inácio/Documents/Santix&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SantixShopApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ecommerce.Santix.SantixShopApplication" />
@@ -91,6 +93,19 @@
       <option name="presentableId" value="Default" />
       <updated>1773357138158</updated>
     </task>
+    <task id="LOCAL-00001" summary="Modelando as entidadesd com JPA">
+      <option name="closed" value="true" />
+      <created>1773630933185</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1773630933185</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modelando as entidadesd com JPA" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modelando as entidadesd com JPA" />
   </component>
 </project>

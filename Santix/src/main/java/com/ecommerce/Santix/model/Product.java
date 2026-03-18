@@ -1,43 +1,52 @@
-package com.ecommerce.Santix.model;
+    package com.ecommerce.Santix.model;
 
-import jakarta.persistence.*;
+    import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+    import java.math.BigDecimal;
+    import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "product")
-public class Product {
+    @Entity
+    @Table(name = "product")
+    public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    private String title;
+        @Column(nullable = false)
+        private String title;
 
-    private String description;
+        @Column(nullable = false)
+        private String description;
 
-    @Column(unique = true)
-    private String sku;
+        @Column(unique = true, nullable = false)
+        private String sku;
 
-    private BigDecimal price;
+        private int quantity;
 
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
+        @Column(nullable = false)
+        private BigDecimal price;
 
-    private LocalDateTime lastUpdate;
+        @Column(updatable = false)
+        private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+        private LocalDateTime lastUpdate;
 
-    @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
+        @ManyToOne
+        @JoinColumn(name = "user_id")
+        private User user;
+
+        @OneToOne
+        @JoinColumn(name = "stock_id")
+        private Stock stock;
+
+        @PrePersist
+        public void prePersist() {
+            createdAt = LocalDateTime.now();
+        }
+
+        @PreUpdate
+        public void preUpdate() {
+            lastUpdate = LocalDateTime.now();
+        }
     }
-
-    @PreUpdate
-    public void preUpdate() {
-        lastUpdate = LocalDateTime.now();
-    }
-}

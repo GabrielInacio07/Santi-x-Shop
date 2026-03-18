@@ -1,20 +1,23 @@
 package com.ecommerce.Santix.model;
 
+import com.ecommerce.Santix.repositories.UserRepository;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column (unique = true)
+    @Column (unique = true, nullable = false)
     private String email;
 
     @Column (nullable = false)
@@ -24,12 +27,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column (updatable = false)
+    @Column (updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime lastUpdate;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Product> products;
 
     //Quando insere no Banco
@@ -43,5 +46,8 @@ public class User {
     public void preUpdate() {
         lastUpdate = LocalDateTime.now();
     }
+
+    @Autowired
+    private UserRepository userRepository;
 
 }

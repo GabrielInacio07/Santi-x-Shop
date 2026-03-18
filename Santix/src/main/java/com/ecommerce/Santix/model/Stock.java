@@ -1,7 +1,9 @@
 package com.ecommerce.Santix.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "stock")
@@ -13,6 +15,7 @@ public class Stock {
 
     private int quantity;
 
+    @Column(nullable = false)
     private String location;
 
     @Column(updatable = false)
@@ -20,8 +23,8 @@ public class Stock {
 
     private LocalDateTime lastUpdate;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", unique = true)
+
+    @OneToOne(mappedBy = "stock")
     private Product product;
 
     @PrePersist
