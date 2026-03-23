@@ -1,19 +1,3 @@
-## 📡 Endpoints - User
-
-### 🔹 Criar usuário
-POST /user
-
-### 🔹 Buscar usuário por ID
-GET /user/{id}
-
-### 🔹 Atualizar usuário
-PUT /user/{id}
-
-### 🔹 Deletar usuário
-DELETE /user/{id}
-
----
-
 ## 🧪 Testes no Postman
 
 ### 📥 Requisições
@@ -22,7 +6,7 @@ DELETE /user/{id}
 
 ---
 
-### 📤 Respostas
+### 📤 Banco
 
 ![Respostas](https://github.com/user-attachments/assets/ff037d4c-f110-440e-ad03-caaeed929246)
 
