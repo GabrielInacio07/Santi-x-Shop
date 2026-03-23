@@ -1,12 +1,18 @@
 package com.ecommerce.Santix.model;
 
-import com.ecommerce.Santix.repositories.UserRepository;
+
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 public class User {
@@ -46,8 +52,5 @@ public class User {
     public void preUpdate() {
         lastUpdate = LocalDateTime.now();
     }
-
-    @Autowired
-    private UserRepository userRepository;
 
 }

@@ -36,7 +36,7 @@
         @JoinColumn(name = "user_id")
         private User user;
 
-        @OneToOne
+        @OneToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "stock_id")
         private Stock stock;
 
