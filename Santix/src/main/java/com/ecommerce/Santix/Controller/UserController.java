@@ -20,6 +20,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Void> salvarUser(@RequestBody UserDTO user){
+
         service.saveUser(user);
         return ResponseEntity.status(201).build();
     }

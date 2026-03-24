@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -22,16 +24,30 @@ public class UserService {
 
 
     public void saveUser(UserDTO userDTO) {
+
+        if (userDTO.getName() == null || userDTO.getName().isBlank()) {
+            throw new IllegalArgumentException("Nome é obrigatório");
+        }
+
+        if (userDTO.getEmail() == null || userDTO.getEmail().isBlank()) {
+            throw new IllegalArgumentException("Email é obrigatório");
+        }
+
+        if (userDTO.getPassword() == null || userDTO.getPassword().isBlank()) {
+            throw new IllegalArgumentException("Senha é obrigatória");
+        }
+
         User user = User.builder()
-                .name(userDTO.getName())
-                .email(userDTO.getEmail())
+                .name(userDTO.getName().trim())
+                .email(userDTO.getEmail().trim())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .role(
                         userDTO.getRole() == Role.SELLER
-                        ? Role.SELLER
-                        : Role.CUSTOMER
+                                ? Role.SELLER
+                                : Role.CUSTOMER
                 )
                 .build();
+
         repository.save(user);
     }
 
@@ -46,31 +62,31 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User consultEmailUser(String email) {
-        return repository.findByEmail(email)
-                .orElseThrow(
-                        () -> new UserNotFoundException("Usuário não encontrado para o email informado")
-                );
-    }
+//    public User consultEmailUser(String email) {
+//        return repository.findByEmail(email)
+//                .orElseThrow(
+//                        () -> new UserNotFoundException("Usuário não encontrado para o email informado")
+//                );
+//    }
 
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
 
         User user = consultUser(id);
         repository.delete(user);
     }
 
-    public void updateUser(Long id, UserUpdateDTO userDTO){
+    public void updateUser(Long id, UserUpdateDTO userDTO) {
         User userEntity = consultUser(id);
 
-        if(userDTO.getName() != null){
+        if (userDTO.getName() != null) {
             userEntity.setName(userDTO.getName());
         }
 
-        if(userDTO.getEmail() != null){
+        if (userDTO.getEmail() != null) {
             userEntity.setEmail(userDTO.getEmail());
         }
 
-        if(userDTO.getPassword() != null){
+        if (userDTO.getPassword() != null) {
             userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         }
         repository.save(userEntity);
