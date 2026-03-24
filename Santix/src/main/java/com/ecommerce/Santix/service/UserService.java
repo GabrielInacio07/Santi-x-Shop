@@ -6,23 +6,19 @@ import com.ecommerce.Santix.Exception.UserNotFoundException;
 import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
+    @Autowired
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
-        this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
 
     public void saveUser(UserDTO userDTO) {

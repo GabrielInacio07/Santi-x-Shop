@@ -2,7 +2,6 @@ package com.ecommerce.Santix.repositories;
 
 import com.ecommerce.Santix.model.User;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

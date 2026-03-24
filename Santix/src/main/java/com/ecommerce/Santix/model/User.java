@@ -1,9 +1,7 @@
 package com.ecommerce.Santix.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,17 +21,17 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column (unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column (updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime lastUpdate;

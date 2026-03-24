@@ -4,26 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserUpdateDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/UserNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Security/PasswordConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Implementando [SERVICE, CONTROLLER, DTO] API rest de Usuário">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/SantixShopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/SantixShopApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserUpdateDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,23 +58,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.SantixShopApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Gabriel Inácio/Documents/Santix",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.SantixShopApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Gabriel Inácio/Documents/Santix&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SantixShopApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ecommerce.Santix.SantixShopApplication" />
@@ -130,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773801460214</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implementando [SERVICE, CONTROLLER, DTO] API rest de Usuário">
+      <option name="closed" value="true" />
+      <created>1774229135661</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774229135661</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +145,7 @@
     <MESSAGE value="Modelando as entidadesd com JPA" />
     <MESSAGE value="Modelando repository's" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'" />
+    <MESSAGE value="Implementando [SERVICE, CONTROLLER, DTO] API rest de Usuário" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementando [SERVICE, CONTROLLER, DTO] API rest de Usuário" />
   </component>
 </project>
