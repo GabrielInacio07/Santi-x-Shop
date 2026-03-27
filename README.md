@@ -22,7 +22,8 @@
 
 ### 📥 Requisições [STOCK]
 
-![Requisições STOCK](https://github.com/user-attachments/assets/e153c777-3705-4c54-902d-5cc396d89c9c)
+<img width="1135" height="411" alt="image" src="https://github.com/user-attachments/assets/c0bffb5d-fcbd-4425-a9e0-386b87c6fb97" />
+
 
 ---
 
