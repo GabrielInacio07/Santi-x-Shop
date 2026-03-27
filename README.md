@@ -2,15 +2,21 @@ Primeira Rest [USER]
 
 ## 🧪 Testes no Postman
 
-### 📥 Requisições
+### 📥 Requisições [USER]
 
 ![Requisições](https://github.com/user-attachments/assets/a71f2d34-4611-4dbe-b98c-3a8444776b2f)
 
+REQUISIÇÕES [STOCK]
+<img width="1789" height="538" alt="image" src="https://github.com/user-attachments/assets/e153c777-3705-4c54-902d-5cc396d89c9c" />
+
 ---
 
-### 📤 Banco
+### 📤 Banco [USER]
 
 ![Respostas](https://github.com/user-attachments/assets/ff037d4c-f110-440e-ad03-caaeed929246)
+
+BANCO [STOCK]
+<img width="517" height="134" alt="image" src="https://github.com/user-attachments/assets/b3de87ad-0319-41af-919d-1a0f6197d83d" />
 
 ---
 
