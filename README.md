@@ -18,5 +18,5 @@ Primeira Rest [USER]
 
 Protótipo das entidades:
 https://dbdiagram.io/d/69b37c06a9fdf1293d16c45c
+<img width="1259" height="997" alt="banco" src="https://github.com/user-attachments/assets/3a9118d8-3030-4066-ad6c-4171fd0959b1" />
 
-![Diagrama](https://github.com/user-attachments/assets/e4bcfd9a-3801-4928-8774-84ee0b42c742)
