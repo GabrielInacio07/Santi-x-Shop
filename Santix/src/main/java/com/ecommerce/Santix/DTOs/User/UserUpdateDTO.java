@@ -1,4 +1,4 @@
-package com.ecommerce.Santix.DTOs;
+package com.ecommerce.Santix.DTOs.User;
 
 import lombok.Getter;
 

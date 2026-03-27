@@ -1,9 +1,16 @@
 package com.ecommerce.Santix.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "stock")
 public class Stock {
@@ -12,19 +19,16 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int quantity;
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String location;
+
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Inventory> inventories;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime lastUpdate;
-
-
-    @OneToOne(mappedBy = "stock")
-    private Product product;
 
     @PrePersist
     public void prePersist() {

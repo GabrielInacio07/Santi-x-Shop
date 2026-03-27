@@ -1,8 +1,8 @@
 package com.ecommerce.Santix.Controller;
 
-import com.ecommerce.Santix.DTOs.UserDTO;
-import com.ecommerce.Santix.DTOs.UserResponseDTO;
-import com.ecommerce.Santix.DTOs.UserUpdateDTO;
+import com.ecommerce.Santix.DTOs.User.UserDTO;
+import com.ecommerce.Santix.DTOs.User.UserResponseDTO;
+import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,9 @@ public class UserController {
     private final UserService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarUser(@RequestBody UserDTO user){
+    public ResponseEntity<Void> salvarUser(@RequestBody UserDTO userDTO){
 
-        service.saveUser(user);
+        service.saveUser(userDTO);
         return ResponseEntity.status(201).build();
     }
 
@@ -38,6 +38,7 @@ public class UserController {
         User user = service.consultUser(id);
 
         UserResponseDTO responseDTO = new UserResponseDTO(
+                user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getRole()
@@ -53,6 +54,7 @@ public class UserController {
 
         List<UserResponseDTO> response = users.stream()
                 .map(user -> new UserResponseDTO(
+                        user.getId(),
                         user.getName(),
                         user.getEmail(),
                         user.getRole()

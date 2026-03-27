@@ -1,10 +1,17 @@
 package com.ecommerce.Santix.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "product")
 public class Product {
@@ -22,23 +29,20 @@ public class Product {
     @Column(unique = true, nullable = false)
     private String sku;
 
-    private int quantity;
-
     @Column(nullable = false)
     private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Inventory> inventories;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime lastUpdate;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
 
     @PrePersist
     public void prePersist() {

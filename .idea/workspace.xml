@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Escondendo credencias dentro da IDE">
+    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Validando os campos vazios na criação de Usuário">
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/StockController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Stock/StockDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Stock/StockReponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Stock/StockUpdateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/StockNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/StockService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/UserUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserUpdateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/StockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/StockRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +32,9 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Exception" />
         <option value="Record" />
+        <option value="AnnotationType" />
+        <option value="Exception" />
         <option value="Class" />
       </list>
     </option>
@@ -73,6 +86,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.ecommerce.Santix.DTOs.User" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Gabriel Inácio\Documents\Santix\Santix\src\main\resources" />
     </key>
@@ -158,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774321916336</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Validando os campos vazios na criação de Usuário">
+      <option name="closed" value="true" />
+      <created>1774323139673</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1774323139673</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,6 +204,7 @@
     <MESSAGE value="Alterando algumas anotações" />
     <MESSAGE value="Mascarando credencias do banco" />
     <MESSAGE value="Escondendo credencias dentro da IDE" />
-    <option name="LAST_COMMIT_MESSAGE" value="Escondendo credencias dentro da IDE" />
+    <MESSAGE value="Validando os campos vazios na criação de Usuário" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validando os campos vazios na criação de Usuário" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 package com.ecommerce.Santix.service;
 
-import com.ecommerce.Santix.DTOs.UserDTO;
-import com.ecommerce.Santix.DTOs.UserUpdateDTO;
+import com.ecommerce.Santix.DTOs.User.UserDTO;
+import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.Exception.UserNotFoundException;
 import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.User;
@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
