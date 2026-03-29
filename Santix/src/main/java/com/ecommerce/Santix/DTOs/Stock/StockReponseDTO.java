@@ -9,4 +9,5 @@ public class StockReponseDTO {
 
     private Long id;
     private String location;
+    private Long userId;
 }

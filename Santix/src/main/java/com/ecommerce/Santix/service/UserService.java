@@ -1,5 +1,6 @@
 package com.ecommerce.Santix.service;
 
+import com.ecommerce.Santix.DTOs.Product.ProductDTO;
 import com.ecommerce.Santix.DTOs.User.UserDTO;
 import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.Exception.UserNotFoundException;
@@ -22,8 +23,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public void saveUser(UserDTO userDTO) {
-
+    private void validateUser(UserDTO userDTO){
         if (userDTO.getName() == null || userDTO.getName().isBlank()) {
             throw new IllegalArgumentException("Nome é obrigatório");
         }
@@ -35,7 +35,11 @@ public class UserService {
         if (userDTO.getPassword() == null || userDTO.getPassword().isBlank()) {
             throw new IllegalArgumentException("Senha é obrigatória");
         }
+    }
 
+    public void saveUser(UserDTO userDTO) {
+
+        validateUser(userDTO);
         User user = User.builder()
                 .name(userDTO.getName().trim())
                 .email(userDTO.getEmail().trim())
@@ -46,7 +50,6 @@ public class UserService {
                                 : Role.CUSTOMER
                 )
                 .build();
-
         repository.save(user);
     }
 

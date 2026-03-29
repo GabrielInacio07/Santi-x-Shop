@@ -3,6 +3,8 @@ package com.ecommerce.Santix.repositories;
 import com.ecommerce.Santix.model.Stock;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StockRepository extends JpaRepository<Stock,Long> {
+import java.util.List;
 
+public interface StockRepository extends JpaRepository<Stock,Long> {
+    List<Stock> findByUserId(Long userId);
 }

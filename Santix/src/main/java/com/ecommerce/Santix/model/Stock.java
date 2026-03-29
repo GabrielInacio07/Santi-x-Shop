@@ -22,6 +22,10 @@ public class Stock {
     @Column(nullable = false, unique = true)
     private String location;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inventory> inventories;
 
