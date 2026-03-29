@@ -1,6 +1,5 @@
 package com.ecommerce.Santix.service;
 
-import com.ecommerce.Santix.DTOs.Product.ProductDTO;
 import com.ecommerce.Santix.DTOs.User.UserDTO;
 import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.Exception.UserNotFoundException;
@@ -23,7 +22,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    private void validateUser(UserDTO userDTO){
+    private void validateUser(UserDTO userDTO) {
         if (userDTO.getName() == null || userDTO.getName().isBlank()) {
             throw new IllegalArgumentException("Nome é obrigatório");
         }

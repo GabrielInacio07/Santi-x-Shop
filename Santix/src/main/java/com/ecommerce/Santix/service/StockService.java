@@ -1,7 +1,6 @@
 package com.ecommerce.Santix.service;
 
 import com.ecommerce.Santix.DTOs.Stock.StockDTO;
-import com.ecommerce.Santix.DTOs.Stock.StockReponseDTO;
 import com.ecommerce.Santix.DTOs.Stock.StockUpdateDTO;
 import com.ecommerce.Santix.Exception.StockNotFoundException;
 import com.ecommerce.Santix.Exception.UserNotFoundException;

@@ -4,12 +4,8 @@ import com.ecommerce.Santix.DTOs.Stock.StockDTO;
 import com.ecommerce.Santix.DTOs.Stock.StockReponseDTO;
 import com.ecommerce.Santix.DTOs.Stock.StockUpdateDTO;
 import com.ecommerce.Santix.model.Stock;
-import com.ecommerce.Santix.model.User;
-import com.ecommerce.Santix.repositories.UserRepository;
 import com.ecommerce.Santix.service.StockService;
-import com.ecommerce.Santix.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

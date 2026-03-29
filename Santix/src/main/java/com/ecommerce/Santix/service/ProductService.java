@@ -23,20 +23,20 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    private void validateProduct(ProductDTO dto){
-        if(dto.getTitle() == null || dto.getTitle().isBlank()){
+    private void validateProduct(ProductDTO dto) {
+        if (dto.getTitle() == null || dto.getTitle().isBlank()) {
             throw new IllegalArgumentException("Título do Produto não pode estar vazio");
         }
 
-        if(dto.getDescription() == null || dto.getDescription().isBlank()){
+        if (dto.getDescription() == null || dto.getDescription().isBlank()) {
             throw new IllegalArgumentException("Descrição do Produto não pode estar vazio");
         }
 
-        if(dto.getSku() == null || dto.getSku().isBlank()){
+        if (dto.getSku() == null || dto.getSku().isBlank()) {
             throw new IllegalArgumentException("SKU do Produto não pode estar vazio");
         }
 
-        if(dto.getPrice() == null || dto.getPrice().compareTo(BigDecimal.ZERO) <= 0){
+        if (dto.getPrice() == null || dto.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Preço do Produto deve ser maior que zero");
         }
     }
@@ -58,7 +58,7 @@ public class ProductService {
         }
     }
 
-    public void saveProduct(ProductDTO productDTO, Long userId){
+    public void saveProduct(ProductDTO productDTO, Long userId) {
 
         User user = isSellerOrThrow(userId);
         validateProduct(productDTO);
@@ -74,20 +74,20 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public Product consultProduct(long id, Long userId){
+    public Product consultProduct(long id, Long userId) {
         isSellerOrThrow(userId);
         Product productEntity = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
 
-        productOwner(productEntity,userId);
+        productOwner(productEntity, userId);
         return productEntity;
     }
 
-    public List<Product> consultAllProduct(Long userId){
+    public List<Product> consultAllProduct(Long userId) {
         isSellerOrThrow(userId);
         return productRepository.findByUserId(userId);
     }
 
-    public void updateProduct(Long id, ProductUpdateDTO productDTO, Long userId){
+    public void updateProduct(Long id, ProductUpdateDTO productDTO, Long userId) {
         Product productEntity = consultProduct(id, userId);
 
         productOwner(productEntity, userId);
@@ -111,10 +111,10 @@ public class ProductService {
         productRepository.save(productEntity);
     }
 
-    public void deleteProduct(Long id, Long userId){
+    public void deleteProduct(Long id, Long userId) {
         Product productEntity = consultProduct(id, userId);
 
-        productOwner(productEntity,userId);
+        productOwner(productEntity, userId);
 
         productRepository.deleteById(id);
 
