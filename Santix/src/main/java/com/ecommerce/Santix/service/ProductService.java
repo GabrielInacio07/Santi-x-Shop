@@ -88,7 +88,6 @@ public class ProductService {
     }
 
     public void updateProduct(Long id, ProductUpdateDTO productDTO, Long userId){
-
         Product productEntity = consultProduct(id, userId);
 
         productOwner(productEntity, userId);
