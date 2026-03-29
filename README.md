@@ -40,8 +40,8 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
 
 * Apenas usuários do tipo **SELLER** podem criar estoques
 * Cada estoque pertence a um único usuário
-* Validação de ownership:
-
+* Validação de controle de estoque:
+  
   * Um usuário só pode visualizar, editar ou deletar seus próprios estoques
 
 ---
@@ -66,7 +66,7 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
 
 * Apenas usuários do tipo **SELLER** podem criar produtos
 * Cada produto pertence a um usuário
-* Validação de ownership:
+* Validação de produto:
 
   * Um usuário só pode manipular seus próprios produtos
 * Validações:
@@ -99,7 +99,7 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
   * um **produto**
   * um **estoque**
 * Ambos devem pertencer ao mesmo usuário (**SELLER**)
-* Validação de ownership:
+* Validação de inventory:
 
   * O usuário só pode manipular inventories vinculados aos seus próprios produtos e estoques
 * Quantidade não pode ser negativa
