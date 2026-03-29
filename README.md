@@ -43,9 +43,8 @@
 ---
 
 ### 📤 Banco [PRODUCT]
+<img width="970" height="87" alt="image" src="https://github.com/user-attachments/assets/0cb6b37d-d137-41fc-82af-348c1e3adbaf" />
 
-> Em construção 🚧
-> Estrutura já integrada com usuário (SELLER) e validações de acesso implementadas.
 
 ---
 
