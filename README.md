@@ -66,4 +66,3 @@ https://dbdiagram.io/d/69b37c06a9fdf1293d16c45c
 * 🔄 Padronização de autenticação via header (`userId`) *(temporário)*
 * 🚧 Futuro: implementação de autenticação real com JWT
 
----p
