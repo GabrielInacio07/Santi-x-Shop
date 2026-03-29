@@ -1,4 +1,4 @@
-# 🛒 Santi-x Shop - API REST
+# 🛒 Santi-x Shop 
 
 ## 👤 Primeira REST [USER]
 
@@ -24,12 +24,28 @@
 
 <img width="1135" height="411" alt="image" src="https://github.com/user-attachments/assets/c0bffb5d-fcbd-4425-a9e0-386b87c6fb97" />
 
-
 ---
 
 ### 📤 Banco [STOCK]
 
 ![Banco STOCK](https://github.com/user-attachments/assets/b3de87ad-0319-41af-919d-1a0f6197d83d)
+
+---
+
+## 📦 Construção da REST [PRODUCT]
+
+### 🧪 Testes no Postman
+
+### 📥 Requisições [PRODUCT]
+
+<img width="1181" height="342" alt="image" src="https://github.com/user-attachments/assets/b796a03d-c810-45b1-b4a4-38f4cfb08302" />
+
+---
+
+### 📤 Banco [PRODUCT]
+
+> Em construção 🚧
+> Estrutura já integrada com usuário (SELLER) e validações de acesso implementadas.
 
 ---
 
@@ -42,3 +58,13 @@ https://dbdiagram.io/d/69b37c06a9fdf1293d16c45c
 
 ---
 
+## 🚀 Evolução do Projeto
+
+* ✔️ CRUD de usuários
+* ✔️ Controle de permissões (SELLER / CUSTOMER)
+* ✔️ REST de estoque com vínculo ao usuário
+* ✔️ REST de produtos com validação de ownership
+* 🔄 Padronização de autenticação via header (`userId`) *(temporário)*
+* 🚧 Futuro: implementação de autenticação real com JWT
+
+---p
