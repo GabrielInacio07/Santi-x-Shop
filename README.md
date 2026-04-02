@@ -20,6 +20,16 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
 
 ---
 
+### ⚙️ Regras de Negócio
+
+* Cadastro de usuários
+* Definição de tipos:
+
+  * SELLER
+  * CUSTOMER
+
+---
+
 ## 📦 Construção da REST [STOCK]
 
 ### 🧪 Testes no Postman
@@ -36,17 +46,15 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
 
 ---
 
-### ⚙️ Regras de Negócio (em construção)
+### ⚙️ Regras de Negócio
 
 * Apenas usuários do tipo **SELLER** podem criar estoques
 * Cada estoque pertence a um único usuário
-* Validação de controle de estoque:
-  
-  * Um usuário só pode visualizar, editar ou deletar seus próprios estoques
+* Um usuário só pode visualizar, editar ou deletar seus próprios estoques
 
 ---
 
-## 📦 Construção da REST [PRODUCT]
+## 🛍️ Construção da REST [PRODUCT]
 
 ### 🧪 Testes no Postman
 
@@ -62,21 +70,22 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
 
 ---
 
-### ⚙️ Regras de Negócio (em construção)
+### ⚙️ Regras de Negócio
 
 * Apenas usuários do tipo **SELLER** podem criar produtos
 * Cada produto pertence a um usuário
-* Validação de produto:
+* Um usuário só pode manipular seus próprios produtos
 
-  * Um usuário só pode manipular seus próprios produtos
-* Validações:
+### ✔️ Validações
 
-  * Nome, descrição e SKU obrigatórios
-  * Preço deve ser maior que zero
+* Nome obrigatório
+* Descrição obrigatória
+* SKU obrigatório
+* Preço deve ser maior que zero
 
 ---
 
-## 📦 Construção da REST [INVENTORY]
+## 📊 Construção da REST [INVENTORY]
 
 ### 🧪 Testes no Postman
 
@@ -92,30 +101,53 @@ API REST para gerenciamento de usuários, produtos, estoques e inventário, com 
 
 ---
 
-### ⚙️ Regras de Negócio (em construção)
+### ⚙️ Regras de Negócio
 
 * O inventory depende de:
 
   * um **produto**
   * um **estoque**
 * Ambos devem pertencer ao mesmo usuário (**SELLER**)
-* Validação de inventory:
-
-  * O usuário só pode manipular inventories vinculados aos seus próprios produtos e estoques
+* Um usuário só pode manipular inventories vinculados aos seus próprios recursos
 * Quantidade não pode ser negativa
 
 ---
 
-### 🔄 Integração entre módulos
+## 🔄 Integração entre módulos
 
 * Inventory conecta:
 
   * Product → Stock
 * Representa a quantidade de produtos disponíveis em um determinado estoque
-* Base para futuras funcionalidades:
 
-  * Controle de vendas
-  * Baixa automática de estoque
+### 🔮 Base para futuras funcionalidades
+
+* Controle de vendas
+* Baixa automática de estoque
+
+---
+
+## ⚠️ Tratamento de Erros
+
+A API possui tratamento global de exceções utilizando **ControllerAdvice**, garantindo respostas padronizadas.
+
+### 📦 Padrão de resposta
+
+```json
+{
+  "code": "ERROR_CODE",
+  "message": "Descrição do erro",
+  "timestamp": "2026-04-01T14:30:00"
+}
+```
+
+### 🚨 Tipos de erro implementados
+
+* ENTITY_NOT_FOUND → 404
+* INVALID_ARGUMENT → 400
+* NOT_AUTHORIZED → 401
+
+<img width="502" height="132" alt="image" src="https://github.com/user-attachments/assets/a66c06e3-f9ad-4824-8da3-249c55d746b0" />
 
 ---
 
@@ -130,25 +162,42 @@ https://dbdiagram.io/d/69b37c06a9fdf1293d16c45c
 
 ## 🚀 Evolução do Projeto
 
-* ✔️ CRUD de usuários
-* ✔️ Controle de permissões (SELLER / CUSTOMER)
-* ✔️ REST de estoque com vínculo ao usuário
-* ✔️ REST de produtos com validação de ownership
-* ✔️ REST de inventory conectando produto e estoque
-* 🔄 Padronização de autenticação via header (`userId`) *(temporário)*
-* 🚧 Futuro: implementação de autenticação real com JWT
+### ✔️ Implementado
+
+* CRUD de usuários
+* Controle de permissões (SELLER / CUSTOMER)
+* REST de estoque com vínculo ao usuário
+* REST de produtos com validação de ownership
+* REST de inventory conectando produto e estoque
+* Tratamento global de exceções
+* Padronização de respostas de erro
+
+---
+
+### 🔄 Em andamento
+
+* Padronização de autenticação via header (`userId`) *(temporário)*
+
+---
+
+### 🔜 Próximos passos
+
+* Autenticação com JWT
+* Módulo de pagamentos
+* Integração com front-end
+* Melhorias na arquitetura
 
 ---
 
 ## 🧠 Observações
 
-* Arquitetura baseada em camadas (Controller → Service → Repository)
-* Validações centralizadas na camada de **Service**
+* Arquitetura em camadas (**Controller → Service → Repository**)
 * Uso de DTOs para entrada e saída de dados
-* Estrutura preparada para evolução com autenticação e regras mais robustas
+* Validações de regra de negócio na camada de Service
+* Estrutura preparada para crescimento e escalabilidade
 
 ---
 
 ## 📌 Status do Projeto
 
-🚧 Em desenvolvimento — foco atual em regras de negócio, validações e estrutura de domínio.
+🚧 Em desenvolvimento — foco atual em regras de negócio, validações e evolução da arquitetura.
