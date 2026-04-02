@@ -2,8 +2,8 @@ package com.ecommerce.Santix.service;
 
 import com.ecommerce.Santix.DTOs.Stock.StockDTO;
 import com.ecommerce.Santix.DTOs.Stock.StockUpdateDTO;
-import com.ecommerce.Santix.Exception.StockNotFoundException;
-import com.ecommerce.Santix.Exception.UserNotFoundException;
+import com.ecommerce.Santix.Exception.EntityNotFound;
+import com.ecommerce.Santix.Exception.UnauthorizedException;
 import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.Stock;
 import com.ecommerce.Santix.model.User;
@@ -23,10 +23,10 @@ public class StockService {
 
     private User isSellerOrThrow(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
 
         if (user.getRole() != Role.SELLER) {
-            throw new IllegalArgumentException("Apenas SELLER pode realizar essa operação");
+            throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
         }
 
         return user;
@@ -34,7 +34,7 @@ public class StockService {
 
     private void stockOwner(Stock stock, Long userId) {
         if (!stock.getUser().getId().equals(userId)) {
-            throw new IllegalArgumentException("Você não tem permissão para acessar este estoque");
+            throw new UnauthorizedException("Você não tem permissão para acessar este estoque");
         }
     }
 
@@ -61,7 +61,7 @@ public class StockService {
     public Stock consultStock(Long id, Long userId) {
         isSellerOrThrow(userId);
         Stock stock = stockRepository.findById(id)
-                .orElseThrow(() -> new StockNotFoundException("Stock não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Stock não encontrado"));
 
         stockOwner(stock, userId);
 

@@ -38,7 +38,6 @@ public class UserController {
         User user = service.consultUser(id);
 
         UserResponseDTO responseDTO = new UserResponseDTO(
-                user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getRole()
@@ -54,7 +53,6 @@ public class UserController {
 
         List<UserResponseDTO> response = users.stream()
                 .map(user -> new UserResponseDTO(
-                        user.getId(),
                         user.getName(),
                         user.getEmail(),
                         user.getRole()

@@ -4,17 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="REST de Product">
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/InventoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Inventory/InventoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Inventory/InventoryReponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Inventory/InventoryUpdateDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/InventoryNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/InventoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/InventoryService.java" afterDir="false" />
+    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Error/ErrorDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/ControllerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/EntityNotFound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/UnauthorizedException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/model/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/InventoryNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/ProductNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/StockNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/UserNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/InventoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +33,8 @@
         <option value="Record" />
         <option value="AnnotationType" />
         <option value="Interface" />
-        <option value="Exception" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -192,7 +197,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774761752862</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="REST de Inventory">
+      <option name="closed" value="true" />
+      <created>1774827790552</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1774827790552</updated>
+    </task>
+    <task id="LOCAL-00011" summary="REST de Inventory">
+      <option name="closed" value="true" />
+      <created>1774827862611</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1774827862611</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,6 +238,7 @@
     <MESSAGE value="Validando os campos vazios na criação de Usuário" />
     <MESSAGE value="REST de Stock" />
     <MESSAGE value="REST de Product" />
-    <option name="LAST_COMMIT_MESSAGE" value="REST de Product" />
+    <MESSAGE value="REST de Inventory" />
+    <option name="LAST_COMMIT_MESSAGE" value="REST de Inventory" />
   </component>
 </project>

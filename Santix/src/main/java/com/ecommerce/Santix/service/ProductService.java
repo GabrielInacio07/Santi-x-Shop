@@ -2,8 +2,8 @@ package com.ecommerce.Santix.service;
 
 import com.ecommerce.Santix.DTOs.Product.ProductDTO;
 import com.ecommerce.Santix.DTOs.Product.ProductUpdateDTO;
-import com.ecommerce.Santix.Exception.ProductNotFoundException;
-import com.ecommerce.Santix.Exception.UserNotFoundException;
+import com.ecommerce.Santix.Exception.EntityNotFound;
+import com.ecommerce.Santix.Exception.UnauthorizedException;
 import com.ecommerce.Santix.model.Product;
 import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.User;
@@ -43,10 +43,10 @@ public class ProductService {
 
     private User isSellerOrThrow(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
 
         if (user.getRole() != Role.SELLER) {
-            throw new IllegalArgumentException("Apenas SELLER pode realizar essa operação");
+            throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
         }
 
         return user;
@@ -54,7 +54,7 @@ public class ProductService {
 
     private void productOwner(Product product, Long userId) {
         if (!product.getUser().getId().equals(userId)) {
-            throw new IllegalArgumentException("Você não tem permissão para acessar este Produto");
+            throw new UnauthorizedException("Você não tem permissão para acessar este Produto");
         }
     }
 
@@ -76,7 +76,7 @@ public class ProductService {
 
     public Product consultProduct(long id, Long userId) {
         isSellerOrThrow(userId);
-        Product productEntity = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
+        Product productEntity = productRepository.findById(id).orElseThrow(() -> new EntityNotFound("Produto não encontrado"));
 
         productOwner(productEntity, userId);
         return productEntity;

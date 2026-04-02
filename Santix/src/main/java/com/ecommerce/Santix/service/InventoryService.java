@@ -2,8 +2,8 @@ package com.ecommerce.Santix.service;
 
 import com.ecommerce.Santix.DTOs.Inventory.InventoryDTO;
 import com.ecommerce.Santix.DTOs.Inventory.InventoryUpdateDTO;
-import com.ecommerce.Santix.Exception.InventoryNotFoundException;
-import com.ecommerce.Santix.Exception.UserNotFoundException;
+import com.ecommerce.Santix.Exception.EntityNotFound;
+import com.ecommerce.Santix.Exception.UnauthorizedException;
 import com.ecommerce.Santix.model.*;
 import com.ecommerce.Santix.repositories.InventoryRepository;
 import com.ecommerce.Santix.repositories.ProductRepository;
@@ -26,10 +26,10 @@ public class InventoryService {
 
     private User isSellerOrThrow(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
 
         if (user.getRole() != Role.SELLER) {
-            throw new IllegalArgumentException("Apenas SELLER pode realizar essa operação");
+            throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
         }
 
         return user;
@@ -38,11 +38,11 @@ public class InventoryService {
     private void ownerStockProduct(Product product, Stock stock, Long userId) {
 
         if (!product.getUser().getId().equals(userId)) {
-            throw new IllegalArgumentException("Produto não pertence ao usuário");
+            throw new UnauthorizedException("Produto não pertence ao usuário");
         }
 
         if (!stock.getUser().getId().equals(userId)) {
-            throw new IllegalArgumentException("Produto não pertence ao usuário");
+            throw new UnauthorizedException("Stock não pertence ao usuário");
         }
     }
 
@@ -52,7 +52,7 @@ public class InventoryService {
         if (!inventory.getProduct().getUser().getId().equals(userId) ||
                 !inventory.getStock().getUser().getId().equals(userId)) {
 
-            throw new IllegalArgumentException("Você não tem permissão para acessar este inventário");
+            throw new UnauthorizedException("Você não tem permissão para acessar este inventário");
         }
     }
 
@@ -61,10 +61,10 @@ public class InventoryService {
         User user = isSellerOrThrow(userId);
 
         Product product = productRepository.findById(inventoryDTO.getProductId())
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Produto não encontrado"));
 
         Stock stock = stockRepository.findById(inventoryDTO.getStockId())
-                .orElseThrow(() -> new RuntimeException("Estoque não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Estoque não encontrado"));
 
         ownerStockProduct(product, stock, userId);
 
@@ -87,7 +87,7 @@ public class InventoryService {
         isSellerOrThrow(userId);
 
         Inventory inventoryEntity = inventoryRepository.findById(id)
-                .orElseThrow(() -> new InventoryNotFoundException("Inventory não encontrado"));
+                .orElseThrow(() -> new EntityNotFound("Inventory não encontrado"));
 
         isValidIventory(inventoryEntity, userId);
 

@@ -2,7 +2,7 @@ package com.ecommerce.Santix.service;
 
 import com.ecommerce.Santix.DTOs.User.UserDTO;
 import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
-import com.ecommerce.Santix.Exception.UserNotFoundException;
+import com.ecommerce.Santix.Exception.EntityNotFound;
 import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.repositories.UserRepository;
@@ -55,7 +55,7 @@ public class UserService {
     public User consultUser(Long id) {
         return repository.findById(id)
                 .orElseThrow(
-                        () -> new UserNotFoundException("Usuário não encontrado para o ID informado")
+                        () -> new EntityNotFound("Usuário não encontrado")
                 );
     }
 
