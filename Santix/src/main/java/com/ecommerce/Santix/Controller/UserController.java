@@ -5,6 +5,7 @@ import com.ecommerce.Santix.DTOs.User.UserResponseDTO;
 import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UserController {
     private final UserService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<Void> salvarUser(@RequestBody @Valid UserDTO userDTO){
 
         service.saveUser(userDTO);
         return ResponseEntity.status(201).build();

@@ -5,6 +5,7 @@ import com.ecommerce.Santix.DTOs.Product.ProductUpdateDTO;
 import com.ecommerce.Santix.DTOs.Product.ProductoResponseDTO;
 import com.ecommerce.Santix.model.Product;
 import com.ecommerce.Santix.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class ProductController {
     private final ProductService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarProduct(@RequestBody ProductDTO productDTO,@RequestHeader("userId") Long userId){
+    public ResponseEntity<Void> salvarProduct(@RequestBody @Valid ProductDTO productDTO, @RequestHeader("userId") Long userId){
         service.saveProduct(productDTO, userId);
 
         return ResponseEntity.status(201).build();

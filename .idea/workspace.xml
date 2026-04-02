@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Error/ErrorDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/ControllerException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/EntityNotFound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/UnauthorizedException.java" afterDir="false" />
+    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Interceptando exceções e refatorando classes de Exceptions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/User/UserResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/InventoryNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/ProductNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/StockNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/UserNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/InventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/StockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/ControllerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Exception/GlobalExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774827862611</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Interceptando exceções e refatorando classes de Exceptions">
+      <option name="closed" value="true" />
+      <created>1775096384049</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1775096384049</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -239,6 +237,7 @@
     <MESSAGE value="REST de Stock" />
     <MESSAGE value="REST de Product" />
     <MESSAGE value="REST de Inventory" />
-    <option name="LAST_COMMIT_MESSAGE" value="REST de Inventory" />
+    <MESSAGE value="Interceptando exceções e refatorando classes de Exceptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Interceptando exceções e refatorando classes de Exceptions" />
   </component>
 </project>

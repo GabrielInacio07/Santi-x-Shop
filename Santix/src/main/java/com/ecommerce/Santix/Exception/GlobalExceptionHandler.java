@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class ControllerException {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFound.class)
     public ResponseEntity<ErrorDTO> entityNotFound(EntityNotFound exception){
