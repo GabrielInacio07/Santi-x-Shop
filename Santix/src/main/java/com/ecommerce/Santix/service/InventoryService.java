@@ -46,7 +46,6 @@ public class InventoryService {
         }
     }
 
-
     private void isValidIventory(Inventory inventory, Long userId) {
 
         if (!inventory.getProduct().getUser().getId().equals(userId) ||

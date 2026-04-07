@@ -1,8 +1,10 @@
 package com.ecommerce.Santix.service;
 
+import com.ecommerce.Santix.DTOs.Register.RegisterRequestDTO;
 import com.ecommerce.Santix.DTOs.User.UserDTO;
 import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.Exception.EntityNotFound;
+import com.ecommerce.Santix.Exception.UnauthorizedException;
 import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.repositories.UserRepository;
@@ -22,37 +24,40 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    private void validateUser(UserDTO userDTO) {
-        if (userDTO.getName() == null || userDTO.getName().isBlank()) {
+    private void validateUser(RegisterRequestDTO requestDTO) {
+
+        if (repository.findByEmail(requestDTO.getEmail()).isPresent()) {
+            throw new UnauthorizedException("Usuário já existe");
+        }
+
+        if (requestDTO.getName() == null || requestDTO.getName().isBlank()) {
             throw new IllegalArgumentException("Nome é obrigatório");
         }
 
-        if (userDTO.getEmail() == null || userDTO.getEmail().isBlank()) {
+        if (requestDTO.getEmail() == null || requestDTO.getEmail().isBlank()) {
             throw new IllegalArgumentException("Email é obrigatório");
         }
 
-        if (userDTO.getPassword() == null || userDTO.getPassword().isBlank()) {
+        if (requestDTO.getPassword() == null || requestDTO.getPassword().isBlank()) {
             throw new IllegalArgumentException("Senha é obrigatória");
         }
+
     }
 
-    public void saveUser(UserDTO userDTO) {
+    public void saveUser(RegisterRequestDTO requestDTO) {
+        validateUser(requestDTO);
 
-        validateUser(userDTO);
         User user = User.builder()
-                .name(userDTO.getName().trim())
-                .email(userDTO.getEmail().trim())
-                .password(passwordEncoder.encode(userDTO.getPassword()))
-                .role(
-                        userDTO.getRole() == Role.SELLER
-                                ? Role.SELLER
-                                : Role.CUSTOMER
-                )
+                .name(requestDTO.getName().trim())
+                .email(requestDTO.getEmail().trim())
+                .password(passwordEncoder.encode(requestDTO.getPassword()))
+                .role(Role.CUSTOMER)
                 .build();
+
         repository.save(user);
     }
 
-    public User consultUser(Long id) {
+        public User consultUser(Long id) {
         return repository.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFound("Usuário não encontrado")
@@ -63,12 +68,12 @@ public class UserService {
         return repository.findAll();
     }
 
-//    public User consultEmailUser(String email) {
-//        return repository.findByEmail(email)
-//                .orElseThrow(
-//                        () -> new UserNotFoundException("Usuário não encontrado para o email informado")
-//                );
-//    }
+    public User consultEmailUser(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(
+                        () -> new EntityNotFound("Usuário não encontrado para o email informado")
+                );
+    }
 
     public void deleteUser(Long id) {
 

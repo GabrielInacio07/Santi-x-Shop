@@ -19,12 +19,6 @@ public class UserController {
 
     private final UserService service;
 
-    @PostMapping
-    public ResponseEntity<Void> salvarUser(@RequestBody @Valid UserDTO userDTO){
-
-        service.saveUser(userDTO);
-        return ResponseEntity.status(201).build();
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizarUser(@PathVariable Long id, @RequestBody UserUpdateDTO userDTO){
