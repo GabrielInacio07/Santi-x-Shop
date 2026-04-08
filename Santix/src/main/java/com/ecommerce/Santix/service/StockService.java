@@ -25,7 +25,7 @@ public class StockService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
 
-        if (user.getRole() != Role.SELLER) {
+        if (user.getRole() == Role.CUSTOMER) {
             throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
         }
 

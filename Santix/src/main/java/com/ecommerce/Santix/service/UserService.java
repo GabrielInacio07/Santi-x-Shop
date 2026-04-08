@@ -8,7 +8,7 @@ import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,83 +18,99 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
 
+    public User getAuthenticatedUser() {
+        return (User) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+    }
 
-    private void validateUser(RegisterRequestDTO requestDTO) {
+    // 🔐 valida ADMIN
+    public void isAdminOrThrow() {
+        User user = getAuthenticatedUser();
 
-        if (repository.findByEmail(requestDTO.getEmail()).isPresent()) {
+        if (user.getRole() != Role.ADMIN) {
+            throw new UnauthorizedException("Apenas ADMIN pode realizar a ação!");
+        }
+    }
+
+
+    private void validateUser(RegisterRequestDTO dto) {
+
+        if (repository.findByEmail(dto.getEmail()).isPresent()) {
             throw new UnauthorizedException("Usuário já existe");
         }
 
-        if (requestDTO.getName() == null || requestDTO.getName().isBlank()) {
+        if (dto.getName() == null || dto.getName().isBlank()) {
             throw new IllegalArgumentException("Nome é obrigatório");
         }
 
-        if (requestDTO.getEmail() == null || requestDTO.getEmail().isBlank()) {
+        if (dto.getEmail() == null || dto.getEmail().isBlank()) {
             throw new IllegalArgumentException("Email é obrigatório");
         }
 
-        if (requestDTO.getPassword() == null || requestDTO.getPassword().isBlank()) {
+        if (dto.getPassword() == null || dto.getPassword().isBlank()) {
             throw new IllegalArgumentException("Senha é obrigatória");
         }
-
     }
 
-    public void saveUser(RegisterRequestDTO requestDTO) {
-        validateUser(requestDTO);
+    private void createUser(RegisterRequestDTO dto, Role role) {
+        validateUser(dto);
 
         User user = User.builder()
-                .name(requestDTO.getName().trim())
-                .email(requestDTO.getEmail().trim())
-                .password(passwordEncoder.encode(requestDTO.getPassword()))
-                .role(requestDTO.getRole() == null ? Role.CUSTOMER : requestDTO.getRole())
+                .name(dto.getName().trim())
+                .email(dto.getEmail().trim())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .role(role)
                 .build();
 
         repository.save(user);
     }
 
-        public User consultUser(Long id) {
+    public void registerCustomer(RegisterRequestDTO dto) {
+        createUser(dto, Role.CUSTOMER);
+    }
+
+    public void registerSeller(RegisterRequestDTO dto) {
+        isAdminOrThrow();
+        createUser(dto, Role.SELLER);
+    }
+
+
+    public User consultUser(Long id) {
         return repository.findById(id)
-                .orElseThrow(
-                        () -> new EntityNotFound("Usuário não encontrado")
-                );
+                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
     }
 
     public List<User> consultAllUser() {
         return repository.findAll();
     }
 
-    public User consultEmailUser(String email) {
-        return repository.findByEmail(email)
-                .orElseThrow(
-                        () -> new EntityNotFound("Usuário não encontrado para o email informado")
-                );
-    }
-
     public void deleteUser(Long id) {
-
+        isAdminOrThrow();
         User user = consultUser(id);
         repository.delete(user);
     }
 
-    public void updateUser(Long id, UserUpdateDTO userDTO) {
-        User userEntity = consultUser(id);
+    public void updateUser(Long id, UserUpdateDTO dto) {
+        isAdminOrThrow();
 
-        if (userDTO.getName() != null) {
-            userEntity.setName(userDTO.getName());
+        User user = consultUser(id);
+
+        if (dto.getName() != null) {
+            user.setName(dto.getName());
         }
 
-        if (userDTO.getEmail() != null) {
-            userEntity.setEmail(userDTO.getEmail());
+        if (dto.getEmail() != null) {
+            user.setEmail(dto.getEmail());
         }
 
-        if (userDTO.getPassword() != null) {
-            userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        if (dto.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
         }
-        repository.save(userEntity);
 
+        repository.save(user);
     }
 }

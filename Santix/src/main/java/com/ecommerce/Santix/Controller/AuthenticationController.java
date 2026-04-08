@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,10 +23,14 @@ public class AuthenticationController {
     private final TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginReponseDTO> userLogin(@RequestBody LoginRequestDTO requestDTO){
+    public ResponseEntity<LoginReponseDTO> login(@RequestBody LoginRequestDTO dto) {
 
-        var userNamePassword = new UsernamePasswordAuthenticationToken(requestDTO.getEmail(),requestDTO.getPassword());
-        var auth = authenticationManager.authenticate(userNamePassword);
+        var authToken = new UsernamePasswordAuthenticationToken(
+                dto.getEmail(),
+                dto.getPassword()
+        );
+
+        var auth = authenticationManager.authenticate(authToken);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
@@ -37,17 +38,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> customerRegister(@RequestBody @Valid RegisterRequestDTO requestDTO){
-        service.saveUser(requestDTO);
-
-        return ResponseEntity.status(201).body("Usuário[Customer] criado com sucesso");
+    public ResponseEntity<String> registerCustomer(@RequestBody @Valid RegisterRequestDTO dto) {
+        service.registerCustomer(dto);
+        return ResponseEntity.status(201).body("Customer criado com sucesso");
     }
 
     @PostMapping("/register/seller")
-    public ResponseEntity<String> SellerRegister(@RequestBody @Valid RegisterRequestDTO requestDTO){
-        service.saveUser(requestDTO);
-
-        return ResponseEntity.status(201).body("Usuário[SELLER] criado com sucesso");
+    public ResponseEntity<String> registerSeller(@RequestBody @Valid RegisterRequestDTO dto) {
+        service.registerSeller(dto);
+        return ResponseEntity.status(201).body("Seller criado com sucesso");
     }
-
 }
