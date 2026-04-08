@@ -27,7 +27,6 @@ public class UserService {
                 .getPrincipal();
     }
 
-    // 🔐 valida ADMIN
     public void isAdminOrThrow() {
         User user = getAuthenticatedUser();
 
