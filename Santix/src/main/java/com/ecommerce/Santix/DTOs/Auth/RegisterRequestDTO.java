@@ -1,4 +1,4 @@
-package com.ecommerce.Santix.DTOs.Register;
+package com.ecommerce.Santix.DTOs.Auth;
 
 import com.ecommerce.Santix.model.Role;
 import lombok.AllArgsConstructor;

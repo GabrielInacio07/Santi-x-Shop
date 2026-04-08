@@ -1,7 +1,6 @@
 package com.ecommerce.Santix.service;
 
-import com.ecommerce.Santix.DTOs.Register.RegisterRequestDTO;
-import com.ecommerce.Santix.DTOs.User.UserDTO;
+import com.ecommerce.Santix.DTOs.Auth.RegisterRequestDTO;
 import com.ecommerce.Santix.DTOs.User.UserUpdateDTO;
 import com.ecommerce.Santix.Exception.EntityNotFound;
 import com.ecommerce.Santix.Exception.UnauthorizedException;
@@ -51,7 +50,7 @@ public class UserService {
                 .name(requestDTO.getName().trim())
                 .email(requestDTO.getEmail().trim())
                 .password(passwordEncoder.encode(requestDTO.getPassword()))
-                .role(Role.CUSTOMER)
+                .role(requestDTO.getRole() == null ? Role.CUSTOMER : requestDTO.getRole())
                 .build();
 
         repository.save(user);

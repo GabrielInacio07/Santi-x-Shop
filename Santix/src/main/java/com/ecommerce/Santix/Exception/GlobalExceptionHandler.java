@@ -3,6 +3,7 @@ package com.ecommerce.Santix.Exception;
 import com.ecommerce.Santix.DTOs.Error.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -43,4 +44,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorDTO> badCredentials(BadCredentialsException exception){
+        ErrorDTO error = ErrorDTO.builder()
+                .code("BAD_CREDENTIALS")
+                .message("Email ou senha inválidos")
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+    }
 }

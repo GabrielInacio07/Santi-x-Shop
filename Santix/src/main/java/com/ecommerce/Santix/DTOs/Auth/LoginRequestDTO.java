@@ -1,4 +1,4 @@
-package com.ecommerce.Santix.DTOs.Login;
+package com.ecommerce.Santix.DTOs.Auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
