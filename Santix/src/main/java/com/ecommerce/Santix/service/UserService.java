@@ -22,9 +22,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public User getAuthenticatedUser() {
-        return (User) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication.getPrincipal() == null) {
+            throw new UnauthorizedException("Usuário não autenticado");
+        }
+
+        return (User) authentication.getPrincipal();
     }
 
     public void isAdminOrThrow() {
@@ -79,11 +83,13 @@ public class UserService {
 
 
     public User consultUser(Long id) {
+        isAdminOrThrow();
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
     }
 
     public List<User> consultAllUser() {
+        isAdminOrThrow();
         return repository.findAll();
     }
 

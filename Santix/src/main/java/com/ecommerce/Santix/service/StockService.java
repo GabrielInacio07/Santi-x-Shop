@@ -8,8 +8,8 @@ import com.ecommerce.Santix.model.Role;
 import com.ecommerce.Santix.model.Stock;
 import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.repositories.StockRepository;
-import com.ecommerce.Santix.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,27 +19,39 @@ import java.util.List;
 public class StockService {
 
     private final StockRepository stockRepository;
-    private final UserRepository userRepository;
 
-    private User isSellerOrThrow(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
+    public User getAuthenticatedUser() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (user.getRole() == Role.CUSTOMER) {
-            throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
+        if (authentication == null || authentication.getPrincipal() == null) {
+            throw new UnauthorizedException("Usuário não autenticado");
+        }
+
+        return (User) authentication.getPrincipal();
+    }
+
+    private User isSellerOrThrow() {
+        User user = getAuthenticatedUser();
+
+        if (user.getRole() != Role.SELLER && user.getRole() != Role.ADMIN) {
+            throw new UnauthorizedException("Apenas SELLER ou ADMIN podem realizar essa operação");
         }
 
         return user;
     }
 
-    private void stockOwner(Stock stock, Long userId) {
-        if (!stock.getUser().getId().equals(userId)) {
+    private void stockOwner(Stock stock, User user) {
+
+        if (user.getRole() == Role.ADMIN) return;
+
+
+        if (!stock.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("Você não tem permissão para acessar este estoque");
         }
     }
 
-    public void saveStock(StockDTO stockDTO, Long userId) {
-        User user = isSellerOrThrow(userId);
+    public void saveStock(StockDTO stockDTO) {
+        User user = isSellerOrThrow();
 
         if (stockDTO.getLocation() == null || stockDTO.getLocation().isBlank()) {
             throw new IllegalArgumentException("Local de estoque não pode estar vazio");
@@ -53,44 +65,46 @@ public class StockService {
         stockRepository.save(stock);
     }
 
-    public List<Stock> consultAllStock(Long userId) {
-        isSellerOrThrow(userId);
-        return stockRepository.findByUserId(userId);
+    public List<Stock> consultAllStock() {
+        User user = isSellerOrThrow();
+        return stockRepository.findByUserId(user.getId());
     }
 
-    public Stock consultStock(Long id, Long userId) {
-        isSellerOrThrow(userId);
+    public Stock consultStock(Long id) {
+        User user = isSellerOrThrow();
+
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFound("Stock não encontrado"));
 
-        stockOwner(stock, userId);
+        stockOwner(stock, user);
 
         return stock;
     }
 
-    public void udpateStock(Long id, StockUpdateDTO stockDTO, Long userId) {
+    public void updateStock(Long id, StockUpdateDTO stockDTO) {
+        User user = isSellerOrThrow();
 
-        Stock stockEntity = consultStock(id, userId);
+        Stock stockEntity = stockRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFound("Stock não encontrado"));
 
-        stockOwner(stockEntity, userId);
+        stockOwner(stockEntity, user);
 
         if (stockDTO.getLocation() != null && !stockDTO.getLocation().isBlank()) {
             stockEntity.setLocation(stockDTO.getLocation());
         }
 
+
         stockRepository.save(stockEntity);
     }
 
-    public void deleteStock(Long id, Long userId) {
+    public void deleteStock(Long id) {
+        User user = isSellerOrThrow();
 
-        Stock stockEntity = consultStock(id, userId);
+        Stock stockEntity = stockRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFound("Stock não encontrado"));
 
-        stockOwner(stockEntity, userId);
+        stockOwner(stockEntity, user);
 
         stockRepository.deleteById(id);
     }
 }
-
-
-
-

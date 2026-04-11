@@ -10,6 +10,7 @@ import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.repositories.ProductRepository;
 import com.ecommerce.Santix.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -22,6 +23,16 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+
+    public User getAuthenticatedUser() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication.getPrincipal() == null) {
+            throw new UnauthorizedException("Usuário não autenticado");
+        }
+
+        return (User) authentication.getPrincipal();
+    }
 
     private void validateProduct(ProductDTO dto) {
         if (dto.getTitle() == null || dto.getTitle().isBlank()) {
@@ -41,26 +52,31 @@ public class ProductService {
         }
     }
 
-    private User isSellerOrThrow(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
+    private User isSellerOrThrow() {
 
-        if (user.getRole() == Role.CUSTOMER) {
-            throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
+        User user = getAuthenticatedUser();
+
+        if (user.getRole() != Role.SELLER && user.getRole() != Role.ADMIN) {
+            throw new UnauthorizedException("Apenas SELLER ou ADMIN podem realizar essa operação");
         }
+
 
         return user;
     }
 
-    private void productOwner(Product product, Long userId) {
-        if (!product.getUser().getId().equals(userId)) {
+    private void productOwner(Product product, User user) {
+
+        if (user.getRole() == Role.ADMIN) return;
+
+
+        if (!product.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("Você não tem permissão para acessar este Produto");
         }
     }
 
-    public void saveProduct(ProductDTO productDTO, Long userId) {
+    public void saveProduct(ProductDTO productDTO) {
 
-        User user = isSellerOrThrow(userId);
+        User user = isSellerOrThrow();
         validateProduct(productDTO);
 
         Product product = Product.builder()
@@ -74,23 +90,27 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public Product consultProduct(long id, Long userId) {
-        isSellerOrThrow(userId);
+    public Product consultProduct(long id) {
+        User user = isSellerOrThrow();
         Product productEntity = productRepository.findById(id).orElseThrow(() -> new EntityNotFound("Produto não encontrado"));
 
-        productOwner(productEntity, userId);
+        productOwner(productEntity, user);
         return productEntity;
     }
 
-    public List<Product> consultAllProduct(Long userId) {
-        isSellerOrThrow(userId);
-        return productRepository.findByUserId(userId);
+    public List<Product> consultAllProduct() {
+        User user = isSellerOrThrow();
+        return productRepository.findByUserId(user.getId());
     }
 
-    public void updateProduct(Long id, ProductUpdateDTO productDTO, Long userId) {
-        Product productEntity = consultProduct(id, userId);
+    public void updateProduct(Long id, ProductUpdateDTO productDTO) {
+        User user = isSellerOrThrow();
 
-        productOwner(productEntity, userId);
+        Product productEntity = productRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFound("Produto não encontrado"));
+
+        productOwner(productEntity, user);
 
         if (productDTO.getTitle() != null && !productDTO.getTitle().isBlank()) {
             productEntity.setTitle(productDTO.getTitle());
@@ -111,10 +131,14 @@ public class ProductService {
         productRepository.save(productEntity);
     }
 
-    public void deleteProduct(Long id, Long userId) {
-        Product productEntity = consultProduct(id, userId);
+    public void deleteProduct(Long id) {
+        User user = isSellerOrThrow();
 
-        productOwner(productEntity, userId);
+        Product productEntity = productRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFound("Produto não encontrado"));
+
+        productOwner(productEntity, user);
 
         productRepository.deleteById(id);
 

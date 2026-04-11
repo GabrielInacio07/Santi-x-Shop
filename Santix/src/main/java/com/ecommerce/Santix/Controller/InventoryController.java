@@ -4,11 +4,9 @@ import com.ecommerce.Santix.DTOs.Inventory.InventoryDTO;
 import com.ecommerce.Santix.DTOs.Inventory.InventoryReponseDTO;
 import com.ecommerce.Santix.DTOs.Inventory.InventoryUpdateDTO;
 import com.ecommerce.Santix.model.Inventory;
-import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +19,17 @@ public class InventoryController {
     private final InventoryService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarInventory(@RequestBody InventoryDTO inventoryDTO, @AuthenticationPrincipal User user) {
+    public ResponseEntity<Void> salvarInventory(@RequestBody InventoryDTO inventoryDTO) {
 
-        service.saveInventory(inventoryDTO, user.getId());
+        service.saveInventory(inventoryDTO);
 
         return ResponseEntity.status(201).build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<InventoryReponseDTO> consultInventory(@PathVariable Long id, @AuthenticationPrincipal User user) {
+    public ResponseEntity<InventoryReponseDTO> consultInventory(@PathVariable Long id) {
 
-        Inventory inventory = service.consultInventory(id, user.getId());
+        Inventory inventory = service.consultInventory(id);
 
         InventoryReponseDTO responseDTO = new InventoryReponseDTO(
                 inventory.getId(),
@@ -44,8 +42,8 @@ public class InventoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<InventoryReponseDTO>> consultAllIventory(@AuthenticationPrincipal User user) {
-        List<Inventory> inventorys = service.consultAllInvetory(user.getId());
+    public ResponseEntity<List<InventoryReponseDTO>> consultAllIventory() {
+        List<Inventory> inventorys = service.consultAllInventory();
 
         List<InventoryReponseDTO> reponseDTOS = inventorys.stream()
                 .map(inventory -> new InventoryReponseDTO(
@@ -61,17 +59,16 @@ public class InventoryController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateInventory(
             @PathVariable Long id,
-            @RequestBody InventoryUpdateDTO inventoryUpdateDTO,
-            @AuthenticationPrincipal User user) {
+            @RequestBody InventoryUpdateDTO inventoryUpdateDTO) {
 
-        service.updateInventory(id, inventoryUpdateDTO, user.getId());
+        service.updateInventory(id, inventoryUpdateDTO);
 
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteInventory(@PathVariable Long id, @AuthenticationPrincipal User user){
-        service.deleteIventory(id, user.getId());
+    public ResponseEntity<Void> deleteInventory(@PathVariable Long id){
+        service.deleteInventory(id);
 
         return ResponseEntity.noContent().build();
     }

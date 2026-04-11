@@ -8,8 +8,10 @@ public class SantixShopApplication {
 
 	public static void main(String[] args) {
         SpringApplication.run(SantixShopApplication.class, args);
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.encode("jhon123"));
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        System.out.println(encoder.encode("teste123"));
+
+        //jhon123 id 23
     }
 
 

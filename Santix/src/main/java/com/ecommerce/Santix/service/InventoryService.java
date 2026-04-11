@@ -8,8 +8,8 @@ import com.ecommerce.Santix.model.*;
 import com.ecommerce.Santix.repositories.InventoryRepository;
 import com.ecommerce.Santix.repositories.ProductRepository;
 import com.ecommerce.Santix.repositories.StockRepository;
-import com.ecommerce.Santix.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,43 +21,54 @@ public class InventoryService {
     private final InventoryRepository inventoryRepository;
     private final ProductRepository productRepository;
     private final StockRepository stockRepository;
-    private final UserRepository userRepository;
 
+    public User getAuthenticatedUser() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    private User isSellerOrThrow(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFound("Usuário não encontrado"));
+        if (authentication == null || authentication.getPrincipal() == null) {
+            throw new UnauthorizedException("Usuário não autenticado");
+        }
 
-        if (user.getRole() == Role.CUSTOMER) {
-            throw new UnauthorizedException("Apenas SELLER pode realizar essa operação");
+        return (User) authentication.getPrincipal();
+    }
+
+    private User isSellerOrThrow() {
+        User user = getAuthenticatedUser();
+
+        if (user.getRole() != Role.SELLER && user.getRole() != Role.ADMIN) {
+            throw new UnauthorizedException("Apenas SELLER ou ADMIN podem realizar essa operação");
         }
 
         return user;
     }
 
-    private void ownerStockProduct(Product product, Stock stock, Long userId) {
+    private void ownerStockProduct(Product product, Stock stock) {
+        User user = isSellerOrThrow();
 
-        if (!product.getUser().getId().equals(userId)) {
+        if (user.getRole() == Role.ADMIN) return;
+
+        if (!product.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("Produto não pertence ao usuário");
         }
 
-        if (!stock.getUser().getId().equals(userId)) {
+        if (!stock.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("Stock não pertence ao usuário");
         }
     }
 
-    private void isValidIventory(Inventory inventory, Long userId) {
+    private void isValidInventory(Inventory inventory) {
+        User user = isSellerOrThrow();
 
-        if (!inventory.getProduct().getUser().getId().equals(userId) ||
-                !inventory.getStock().getUser().getId().equals(userId)) {
+        if (user.getRole() == Role.ADMIN) return;
+
+        if (!inventory.getProduct().getUser().getId().equals(user.getId()) ||
+                !inventory.getStock().getUser().getId().equals(user.getId())) {
 
             throw new UnauthorizedException("Você não tem permissão para acessar este inventário");
         }
     }
 
-    public void saveInventory(InventoryDTO inventoryDTO, Long userId) {
-
-        User user = isSellerOrThrow(userId);
+    public void saveInventory(InventoryDTO inventoryDTO) {
 
         Product product = productRepository.findById(inventoryDTO.getProductId())
                 .orElseThrow(() -> new EntityNotFound("Produto não encontrado"));
@@ -65,7 +76,7 @@ public class InventoryService {
         Stock stock = stockRepository.findById(inventoryDTO.getStockId())
                 .orElseThrow(() -> new EntityNotFound("Estoque não encontrado"));
 
-        ownerStockProduct(product, stock, userId);
+        ownerStockProduct(product, stock);
 
         if (inventoryDTO.getQuantity() <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser maior que zero");
@@ -78,30 +89,32 @@ public class InventoryService {
                 .build();
 
         inventoryRepository.save(inventory);
-
     }
 
-    public Inventory consultInventory(Long id, Long userId) {
-
-        isSellerOrThrow(userId);
+    public Inventory consultInventory(Long id) {
 
         Inventory inventoryEntity = inventoryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFound("Inventory não encontrado"));
 
-        isValidIventory(inventoryEntity, userId);
+        isValidInventory(inventoryEntity);
 
         return inventoryEntity;
     }
 
-    public List<Inventory> consultAllInvetory(Long userId) {
-        isSellerOrThrow(userId);
-        return inventoryRepository.findByProductUserIdAndStockUserId(userId, userId);
+    public List<Inventory> consultAllInventory() {
+        User user = isSellerOrThrow();
+
+        if (user.getRole() == Role.ADMIN) {
+            return inventoryRepository.findAll();
+        }
+
+        return inventoryRepository.findByProductUserIdAndStockUserId(user.getId(), user.getId()
+        );
     }
 
-    public void updateInventory(Long id, InventoryUpdateDTO inventoryUpdateDTO, Long userId) {
+    public void updateInventory(Long id, InventoryUpdateDTO inventoryUpdateDTO) {
 
-        Inventory inventoryEntity = consultInventory(id, userId);
-        isValidIventory(inventoryEntity, userId);
+        Inventory inventoryEntity = consultInventory(id);
 
         if (inventoryUpdateDTO.getQuantity() != null) {
 
@@ -111,12 +124,13 @@ public class InventoryService {
 
             inventoryEntity.setQuantity(inventoryUpdateDTO.getQuantity());
         }
+
         inventoryRepository.save(inventoryEntity);
     }
 
-    public void deleteIventory(Long id, Long userId) {
-        isSellerOrThrow(userId);
-        Inventory inventoryEntity = consultInventory(id, userId);
+    public void deleteInventory(Long id) {
+
+        Inventory inventoryEntity = consultInventory(id);
 
         inventoryRepository.deleteById(id);
     }

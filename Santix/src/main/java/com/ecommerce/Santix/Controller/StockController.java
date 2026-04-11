@@ -21,16 +21,16 @@ public class StockController {
     private final StockService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarStock(@RequestBody StockDTO stockDTO, @AuthenticationPrincipal User user){
-        service.saveStock(stockDTO, user.getId());
+    public ResponseEntity<Void> salvarStock(@RequestBody StockDTO stockDTO){
+        service.saveStock(stockDTO);
 
         return ResponseEntity.status(201).build();
     }
 
     @GetMapping
-    public ResponseEntity<List<StockReponseDTO>> buscarAllStocks( @AuthenticationPrincipal User user){
+    public ResponseEntity<List<StockReponseDTO>> buscarAllStocks(){
 
-        List<Stock> stocks = service.consultAllStock(user.getId());
+        List<Stock> stocks = service.consultAllStock();
 
         List<StockReponseDTO> response = stocks.stream()
                 .map(stock -> new StockReponseDTO(
@@ -43,8 +43,8 @@ public class StockController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StockReponseDTO> buscarStock(@PathVariable Long id,  @AuthenticationPrincipal User user){
-        Stock stock = service.consultStock(id, user.getId());
+    public ResponseEntity<StockReponseDTO> buscarStock(@PathVariable Long id){
+        Stock stock = service.consultStock(id);
 
         StockReponseDTO responseDTO = new StockReponseDTO(
                 stock.getUser().getId(),
@@ -55,15 +55,15 @@ public class StockController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateStock(@PathVariable Long id, @RequestBody StockUpdateDTO stockDTO,  @AuthenticationPrincipal User user){
+    public ResponseEntity<Void> updateStock(@PathVariable Long id, @RequestBody StockUpdateDTO stockDTO){
 
-        service.udpateStock(id, stockDTO, user.getId());
+        service.updateStock(id, stockDTO);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStock(@PathVariable Long id,  @AuthenticationPrincipal User user){
-        service.deleteStock(id, user.getId());
+    public ResponseEntity<Void> deleteStock(@PathVariable Long id){
+        service.deleteStock(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -22,16 +22,16 @@ public class ProductController {
     private final ProductService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarProduct(@RequestBody @Valid ProductDTO productDTO, @AuthenticationPrincipal User user){
-        service.saveProduct(productDTO, user.getId());
+    public ResponseEntity<Void> salvarProduct(@RequestBody @Valid ProductDTO productDTO){
+        service.saveProduct(productDTO);
 
         return ResponseEntity.status(201).build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoResponseDTO> buscarProduct(@PathVariable Long id, @AuthenticationPrincipal User user){
+    public ResponseEntity<ProductoResponseDTO> buscarProduct(@PathVariable Long id){
 
-        Product product = service.consultProduct(id, user.getId());
+        Product product = service.consultProduct(id);
 
         ProductoResponseDTO responseDTO = new ProductoResponseDTO(
                 product.getTitle(),
@@ -44,8 +44,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductoResponseDTO>> buscarAllProduts(@AuthenticationPrincipal User user){
-        List<Product> products = service.consultAllProduct(user.getId());
+    public ResponseEntity<List<ProductoResponseDTO>> buscarAllProduts(){
+        List<Product> products = service.consultAllProduct();
 
         List<ProductoResponseDTO> responseDTO = products.stream()
                 .map(product -> new ProductoResponseDTO(
@@ -64,14 +64,14 @@ public class ProductController {
             @RequestBody ProductUpdateDTO productDTO,
             @AuthenticationPrincipal User user){
 
-        service.updateProduct(id, productDTO, user.getId());
+        service.updateProduct(id, productDTO);
 
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id, @AuthenticationPrincipal User user){
-        service.deleteProduct(id,user.getId());
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        service.deleteProduct(id);
 
         return ResponseEntity.noContent().build();
     }

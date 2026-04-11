@@ -1,5 +1,6 @@
 package com.ecommerce.Santix.Security;
 
+import com.ecommerce.Santix.Exception.UnauthorizedException;
 import com.ecommerce.Santix.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,8 +25,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException
-    {
+            FilterChain filterChain) throws ServletException, IOException {
 
         String path = request.getRequestURI();
         if (path.startsWith("/auth")) {
@@ -33,24 +33,42 @@ public class SecurityFilter extends OncePerRequestFilter {
             return;
         }
 
-        var token = recoverToken(request);
+        try {
+            var token = recoverToken(request);
 
-        if (token != null) {
-            var email = tokenService.validateToken(token);
+            if (token != null) {
+                var email = tokenService.validateToken(token);
 
-            var user = userRepository.findByEmail(email)
-                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                var user = userRepository.findByEmail(email)
+                        .orElseThrow(() -> new UnauthorizedException("Usuário não encontrado"));
 
-            var authentication = new UsernamePasswordAuthenticationToken(
-                    user,
-                    null,
-                    user.getAuthorities()
-            );
+                var authentication = new UsernamePasswordAuthenticationToken(
+                        user,
+                        null,
+                        user.getAuthorities()
+                );
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+
+            filterChain.doFilter(request, response);
+
+        } catch (Exception e) {
+
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+            String json = """
+                        {
+                            "code": "INVALID_TOKEN",
+                            "message": "%s",
+                            "timestamp": "%s"
+                        }
+                    """.formatted(e.getMessage(), java.time.LocalDateTime.now());
+
+            response.getWriter().write(json);
+            return;
         }
-
-        filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request) {
