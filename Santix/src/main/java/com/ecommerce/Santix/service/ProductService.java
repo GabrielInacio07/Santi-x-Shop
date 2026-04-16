@@ -68,7 +68,6 @@ public class ProductService {
 
         if (user.getRole() == Role.ADMIN) return;
 
-
         if (!product.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("Você não tem permissão para acessar este Produto");
         }
