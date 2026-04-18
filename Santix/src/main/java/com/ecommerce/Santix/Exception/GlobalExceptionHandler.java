@@ -13,20 +13,22 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFound.class)
-    public ResponseEntity<ErrorDTO> entityNotFound(EntityNotFound exception){
+    public ResponseEntity<ErrorDTO> entityNotFound(EntityNotFound exception) {
         ErrorDTO error = ErrorDTO.builder()
-               .code("ENTITY_NOT_FOUND")
-               .message(exception.getMessage())
-               .timestamp(LocalDateTime.now())
-               .build();
-       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+                .code(404)
+                .message("NOT_FOUND")
+                .details(exception.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorDTO> userIllegalArgument(IllegalArgumentException exception){
+    public ResponseEntity<ErrorDTO> userIllegalArgument(IllegalArgumentException exception) {
         ErrorDTO error = ErrorDTO.builder()
-                .code("INVALID_ARGUMENT")
-                .message(exception.getMessage())
+                .code(400)
+                .message("BAD_REQUEST")
+                .details(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
 
@@ -34,10 +36,11 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<ErrorDTO> notAuthorized (UnauthorizedException exception){
+    public ResponseEntity<ErrorDTO> notAuthorized(UnauthorizedException exception) {
         ErrorDTO error = ErrorDTO.builder()
-                .code("NOT_AUTHORIZED")
-                .message(exception.getMessage())
+                .code(403)
+                .message("NOT_AUTHORIZED")
+                .details(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
 
@@ -45,10 +48,11 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ErrorDTO> badCredentials(BadCredentialsException exception){
+    public ResponseEntity<ErrorDTO> badCredentials(BadCredentialsException exception) {
         ErrorDTO error = ErrorDTO.builder()
-                .code("BAD_CREDENTIALS")
-                .message("Email ou senha inválidos")
+                .code(401)
+                .message("BAD_CREDENTIALS")
+                .details("Email ou senha inválidos")
                 .timestamp(LocalDateTime.now())
                 .build();
 
@@ -56,10 +60,11 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDTO> handleGeneric(Exception exception){
+    public ResponseEntity<ErrorDTO> handleGeneric(Exception exception) {
         ErrorDTO error = ErrorDTO.builder()
-                .code("INTERNAL_ERROR")
-                .message("Erro interno do servidor")
+                .code(500)
+                .message("SERVER_ERROR")
+                .details(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
 
