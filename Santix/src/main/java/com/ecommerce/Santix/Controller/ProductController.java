@@ -22,7 +22,7 @@ public class ProductController {
     private final ProductService service;
 
     @PostMapping
-    public ResponseEntity<Void> salvarProduct(@RequestBody @Valid ProductDTO productDTO){
+    public ResponseEntity<Void> salvarProduct(@RequestBody ProductDTO productDTO){
         service.saveProduct(productDTO);
 
         return ResponseEntity.status(201).build();
@@ -61,8 +61,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateProduct(
             @PathVariable Long id,
-            @RequestBody ProductUpdateDTO productDTO,
-            @AuthenticationPrincipal User user){
+            @RequestBody ProductUpdateDTO productDTO){
 
         service.updateProduct(id, productDTO);
 

@@ -27,12 +27,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        String path = request.getRequestURI();
-        if (path.startsWith("/auth")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         try {
             var token = recoverToken(request);
 
@@ -54,7 +48,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         } catch (Exception e) {
-
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
@@ -67,7 +60,6 @@ public class SecurityFilter extends OncePerRequestFilter {
                     """.formatted(e.getMessage(), java.time.LocalDateTime.now());
 
             response.getWriter().write(json);
-            return;
         }
     }
 

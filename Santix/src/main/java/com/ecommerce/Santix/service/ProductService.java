@@ -50,6 +50,7 @@ public class ProductService {
         if (dto.getPrice() == null || dto.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Preço do Produto deve ser maior que zero");
         }
+
     }
 
     private User isSellerOrThrow() {
@@ -77,6 +78,8 @@ public class ProductService {
 
         User user = isSellerOrThrow();
         validateProduct(productDTO);
+
+
 
         Product product = Product.builder()
                 .user(user)

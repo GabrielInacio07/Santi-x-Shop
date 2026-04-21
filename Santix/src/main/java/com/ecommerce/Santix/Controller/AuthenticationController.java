@@ -38,13 +38,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@RequestBody @Valid RegisterRequestDTO dto) {
+    public ResponseEntity<String> registerCustomer(@RequestBody RegisterRequestDTO dto) {
         service.registerCustomer(dto);
         return ResponseEntity.status(201).body("Customer criado com sucesso");
     }
 
     @PostMapping("/register/seller")
-    public ResponseEntity<String> registerSeller(@RequestBody @Valid RegisterRequestDTO dto) {
+    public ResponseEntity<String> registerSeller(@RequestBody RegisterRequestDTO dto) {
+        System.out.println("teste");
         service.registerSeller(dto);
         return ResponseEntity.status(201).body("Seller criado com sucesso");
     }

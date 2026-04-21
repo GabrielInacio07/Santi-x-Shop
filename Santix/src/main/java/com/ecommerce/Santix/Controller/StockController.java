@@ -4,11 +4,9 @@ import com.ecommerce.Santix.DTOs.Stock.StockDTO;
 import com.ecommerce.Santix.DTOs.Stock.StockReponseDTO;
 import com.ecommerce.Santix.DTOs.Stock.StockUpdateDTO;
 import com.ecommerce.Santix.model.Stock;
-import com.ecommerce.Santix.model.User;
 import com.ecommerce.Santix.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
