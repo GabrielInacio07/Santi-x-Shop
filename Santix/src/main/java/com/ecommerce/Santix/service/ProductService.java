@@ -74,14 +74,19 @@ public class ProductService {
         }
     }
 
+    private void validateSku(String sku) {
+        if (productRepository.findBySku(sku).isPresent()) {
+            throw new IllegalArgumentException("SKU já existe");
+        }
+    }
+
     public void saveProduct(ProductDTO productDTO) {
 
         User user = isSellerOrThrow();
         validateProduct(productDTO);
+        validateSku(productDTO.getSku().trim());
 
-
-
-        Product product = Product.builder()
+         Product product = Product.builder()
                 .user(user)
                 .title(productDTO.getTitle().trim())
                 .description(productDTO.getDescription().trim())

@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="response do DTO-error">
+    <list default="true" id="fba4f211-a714-4a3f-a5f7-990fa54049b9" name="Changes" comment="Inserindo Role no TOKEN JWT">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Controller/StockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Auth/RegisterRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/DTOs/Auth/RegisterRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/SantixShopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/SantixShopApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Security/SecurityFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Security/SecurityFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Security/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/Security/TokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/repositories/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/java/com/ecommerce/Santix/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santix/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Santix/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776530483080</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Inserindo Role no TOKEN JWT">
+      <option name="closed" value="true" />
+      <created>1776789187843</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1776789187843</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -326,6 +327,7 @@
     <MESSAGE value="Limpando código, e redirecionando modificações para role.ADMIN" />
     <MESSAGE value="tirando role do DTO" />
     <MESSAGE value="response do DTO-error" />
-    <option name="LAST_COMMIT_MESSAGE" value="response do DTO-error" />
+    <MESSAGE value="Inserindo Role no TOKEN JWT" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inserindo Role no TOKEN JWT" />
   </component>
 </project>
