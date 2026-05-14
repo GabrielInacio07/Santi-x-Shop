@@ -150,4 +150,9 @@ public class ProductService {
         productRepository.deleteById(id);
 
     }
+
+    public List<Product> getProductsMaxPrice(BigDecimal price){
+        User user = isSellerOrThrow();
+        return productRepository.getProductsMaxPrice(user.getId(),price);
+    }
 }

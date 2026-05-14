@@ -1,6 +1,7 @@
 package com.ecommerce.Santix.Controller;
 
 import com.ecommerce.Santix.DTOs.Product.ProductDTO;
+import com.ecommerce.Santix.DTOs.Product.ProductResponsePriceDTO;
 import com.ecommerce.Santix.DTOs.Product.ProductUpdateDTO;
 import com.ecommerce.Santix.DTOs.Product.ProductoResponseDTO;
 import com.ecommerce.Santix.model.Product;
@@ -11,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -39,6 +42,22 @@ public class ProductController {
                 product.getSku(),
                 product.getPrice()
         );
+
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @GetMapping("/maxprice/{price}")
+    public ResponseEntity<List<ProductoResponseDTO>> buscarMaiorPreco(@PathVariable BigDecimal price){
+
+        List<Product> products = service.getProductsMaxPrice(price);
+
+        List<ProductoResponseDTO> responseDTO = products.stream()
+                .map(product -> new ProductoResponseDTO(
+                        product.getTitle(),
+                        product.getDescription(),
+                        product.getSku(),
+                        product.getPrice()
+                )).toList();
 
         return ResponseEntity.ok(responseDTO);
     }
